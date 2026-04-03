@@ -12,7 +12,7 @@ Creare un gestionale per le ore di lavoro con grafica
 - Metodo Astratto: calcolaStipendio(double oreTotale) -> Ogni ruolo potrebbe avere bonus diversi
 
 
-### Classi Figlie: Sviluppatore, Tester, Designer
+#### Classi Figlie: Sviluppatore, Tester, Designer
 Ereditano da Persona
 
 - Override di descriviRuolo() per personalizzare l'interfaccia
@@ -37,3 +37,7 @@ Questa è la classe che gestisce l'array di "caselle".
 
 
 ### Classe: Main
+
+
+
+pacchetti: persona, tempo, main
