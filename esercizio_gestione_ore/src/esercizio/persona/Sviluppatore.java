@@ -4,8 +4,8 @@ public class Sviluppatore extends Persona
 {   
     private String linguaggio;
 
-    public Sviluppatore(String nome,int eta,String linguaggio) {
-        super(nome, eta);
+    public Sviluppatore(int id, String nome,int eta,String linguaggio) {
+        super(id, nome, eta);
         this.linguaggio=linguaggio;
     }
 

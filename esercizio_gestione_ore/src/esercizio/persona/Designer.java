@@ -3,8 +3,8 @@ package esercizio.persona;
 public class Designer extends Persona {
     private String tool;
 
-    public Designer(String nome, int eta, String tool) {
-        super(nome, eta);
+    public Designer(int id, String nome, int eta, String tool) {
+        super(id, nome, eta);
         this.tool = tool;
     }
 

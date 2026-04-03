@@ -3,8 +3,8 @@ package esercizio.persona;
 public class Tester extends Persona {
     private String tipoTest;
 
-    public Tester(String nome, int eta, String tipoTest) {
-        super(nome, eta);
+    public Tester(int id, String nome, int eta, String tipoTest) {
+        super(id, nome, eta);
         this.tipoTest = tipoTest;
     }
 
