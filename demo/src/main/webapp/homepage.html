@@ -7,22 +7,13 @@
 </head>
 <body>
     <h1>Benvenuto nel Gestionale Ore di Lavoro</h1>
-    <p>Clicca il pulsante per ricevere un messaggio dal servlet:</p>
-    <button onclick="callServlet()">Chiama Servlet</button>
-
-    <div id="response" style="margin-top:20px; font-weight:bold;"></div>
-
-    <script>
-        function callServlet() {
-            fetch('hello')
-                .then(response => response.text())
-                .then(text => {
-                    document.getElementById('response').innerText = text;
-                })
-                .catch(err => {
-                    document.getElementById('response').innerText = 'Errore: ' + err;
-                });
-        }
-    </script>
+    <p>Cosa possiamo fare oggi per te?</p>
+    <button onclick="insertWorker()">Inserisci dipendente</button>
+    <button onclick="viewWorkers()">Visualizza tutti i dipendenti</button>
+    <button onclick="findWorker()">Cerca dipendente</button>
+    <button onclick="modifyWorker()">Modifica dipendente</button>
+    <button onclick="removeWorker()">Elimina dipendente</button>
+    
+    <button onclick="viewWorkShifts()">Visualizza turni di lavoro</button>
 </body>
 </html>
