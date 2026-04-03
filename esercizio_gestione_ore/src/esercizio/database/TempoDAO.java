@@ -2,8 +2,49 @@ package esercizio.database;
 
 import esercizio.tempo.*;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class TempoDAO {
+
+    // Classe di supporto per popolare la combo dei mesi
+    public static class MeseInfo {
+        public final int    id;
+        public final String etichetta;
+
+        public MeseInfo(int id, int meseCalendario, int anno) {
+            this.id       = id;
+            String[] nomi = {"","Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno",
+                              "Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"};
+            this.etichetta = nomi[meseCalendario] + " " + anno + "  (ID foglio: " + id + ")";
+        }
+
+        @Override public String toString() { return etichetta; }
+    }
+
+    // READ: Restituisce i mesi registrati per un dato dipendente
+    public ArrayList<MeseInfo> getMesiPerPersona(int personaId) {
+        ArrayList<MeseInfo> lista = new ArrayList<>();
+        String sql = "SELECT id, mese_calendario, anno FROM Mese " +
+                     "WHERE persona_id = ? ORDER BY anno, mese_calendario";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, personaId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                lista.add(new MeseInfo(
+                    rs.getInt("id"),
+                    rs.getInt("mese_calendario"),
+                    rs.getInt("anno")
+                ));
+            }
+
+        } catch (SQLException e) {
+            System.err.println("[ERRORE GET MESI PER PERSONA] " + e.getMessage());
+        }
+        return lista;
+    }
 
     // CREATE MESE
     public int creaMese(Mese m) {
@@ -33,7 +74,7 @@ public class TempoDAO {
     }
 
     // CREATE/UPDATE GIORNO
-    public void salvaOreGiorno(int meseId, int numeroGiorno, double ore, String note) {
+    public boolean salvaOreGiorno(int meseId, int numeroGiorno, double ore, String note) {
         String sql = "INSERT INTO Giorno (mese_id, numero_giorno, ore_lavorate, note) " +
                      "VALUES (?, ?, ?, ?)"; // Semplificato per evitare errori di vincoli
 
@@ -47,9 +88,11 @@ public class TempoDAO {
 
             stmt.executeUpdate();
             System.out.println("[DB] Ore registrate per il giorno " + numeroGiorno);
+            return true;
 
         } catch (SQLException e) {
             System.err.println("[ERRORE SALVA ORE] " + e.getMessage());
+            return false;
         }
     }
 

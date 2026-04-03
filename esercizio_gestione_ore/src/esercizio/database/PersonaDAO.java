@@ -6,6 +6,21 @@ import java.util.ArrayList;
 
 public class PersonaDAO {
 
+    // Classe di supporto per la visualizzazione completa nella tabella
+    public static class PersonaInfo {
+        public final int    id;
+        public final String nome;
+        public final int    eta;
+        public final String ruolo;
+
+        public PersonaInfo(int id, String nome, int eta, String ruolo) {
+            this.id    = id;
+            this.nome  = nome;
+            this.eta   = eta;
+            this.ruolo = ruolo;
+        }
+    }
+
     // CREATE: Inserisce una nuova persona (nella tabella base Persona)
     public void create(Persona p) {
         String sql = "INSERT INTO Persona (nome, eta) VALUES (?, ?)";
@@ -25,7 +40,7 @@ public class PersonaDAO {
     }
 
     // CREATE SVILUPPATORE: Inserisce in Persona + Sviluppatore
-    public void createSviluppatore(Sviluppatore s) {
+    public boolean createSviluppatore(Sviluppatore s) {
         String sqlPersona = "INSERT INTO Persona (nome, eta) VALUES (?, ?)";
         String sqlSviluppatore = "INSERT INTO Sviluppatore (id, linguaggio) VALUES (?, ?)";
 
@@ -51,14 +66,16 @@ public class PersonaDAO {
 
             conn.commit();
             System.out.println("[DB] Sviluppatore inserito con successo.");
+            return true;
 
         } catch (SQLException e) {
             System.err.println("[ERRORE CREATE SVILUPPATORE] " + e.getMessage());
+            return false;
         }
     }
 
     // CREATE DESIGNER: Inserisce in Persona + Designer
-    public void createDesigner(Designer d) {
+    public boolean createDesigner(Designer d) {
         String sqlPersona = "INSERT INTO Persona (nome, eta) VALUES (?, ?)";
         String sqlDesigner = "INSERT INTO Designer (id, tool) VALUES (?, ?)";
 
@@ -84,14 +101,16 @@ public class PersonaDAO {
 
             conn.commit();
             System.out.println("[DB] Designer inserito con successo.");
+            return true;
 
         } catch (SQLException e) {
             System.err.println("[ERRORE CREATE DESIGNER] " + e.getMessage());
+            return false;
         }
     }
 
     // CREATE TESTER: Inserisce in Persona + Tester
-    public void createTester(Tester t) {
+    public boolean createTester(Tester t) {
         String sqlPersona = "INSERT INTO Persona (nome, eta) VALUES (?, ?)";
         String sqlTester = "INSERT INTO Tester (id, tipo_test) VALUES (?, ?)";
 
@@ -117,9 +136,11 @@ public class PersonaDAO {
 
             conn.commit();
             System.out.println("[DB] Tester inserito con successo.");
+            return true;
 
         } catch (SQLException e) {
             System.err.println("[ERRORE CREATE TESTER] " + e.getMessage());
+            return false;
         }
     }
 
@@ -139,6 +160,42 @@ public class PersonaDAO {
 
         } catch (SQLException e) {
             System.err.println("[ERRORE READ] " + e.getMessage());
+        }
+        return lista;
+    }
+
+    // READ COMPLETO: Restituisce ID, Nome, Età e Ruolo per la tabella dipendenti
+    public ArrayList<PersonaInfo> getPersoneCompleto() {
+        ArrayList<PersonaInfo> lista = new ArrayList<>();
+        String sql =
+            "SELECT p.id, p.nome, p.eta, " +
+            "       CASE " +
+            "           WHEN s.id IS NOT NULL THEN 'Sviluppatore' " +
+            "           WHEN d.id IS NOT NULL THEN 'Designer' " +
+            "           WHEN t.id IS NOT NULL THEN 'Tester' " +
+            "           ELSE 'N/D' " +
+            "       END AS ruolo " +
+            "FROM Persona p " +
+            "LEFT JOIN Sviluppatore s ON p.id = s.id " +
+            "LEFT JOIN Designer     d ON p.id = d.id " +
+            "LEFT JOIN Tester       t ON p.id = t.id " +
+            "ORDER BY p.id";
+
+        try (Connection conn = DBConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                lista.add(new PersonaInfo(
+                    rs.getInt("id"),
+                    rs.getString("nome"),
+                    rs.getInt("eta"),
+                    rs.getString("ruolo")
+                ));
+            }
+
+        } catch (SQLException e) {
+            System.err.println("[ERRORE READ COMPLETO] " + e.getMessage());
         }
         return lista;
     }
@@ -163,7 +220,7 @@ public class PersonaDAO {
     }
 
     // UPDATE: Aggiorna l'età tramite ID
-    public void updateEta(int id, int nuovaEta) {
+    public boolean updateEta(int id, int nuovaEta) {
         String sql = "UPDATE Persona SET eta = ? WHERE id = ?";
 
         try (Connection conn = DBConnection.getConnection();
@@ -175,15 +232,18 @@ public class PersonaDAO {
             int righeColpite = stmt.executeUpdate();
             if (righeColpite > 0) {
                 System.out.println("[DB] Età aggiornata per ID: " + id);
+                return true;
             }
+            return false;
 
         } catch (SQLException e) {
             System.err.println("[ERRORE UPDATE] " + e.getMessage());
+            return false;
         }
     }
 
     // DELETE: Rimuove una persona tramite ID (CASCADE sulle sottotabelle)
-    public void delete(int id) {
+    public boolean delete(int id) {
         String sql = "DELETE FROM Persona WHERE id = ?";
 
         try (Connection conn = DBConnection.getConnection();
@@ -194,10 +254,13 @@ public class PersonaDAO {
             int righeColpite = stmt.executeUpdate();
             if (righeColpite > 0) {
                 System.out.println("[DB] Persona eliminata con successo.");
+                return true;
             }
+            return false;
 
         } catch (SQLException e) {
             System.err.println("[ERRORE DELETE] " + e.getMessage());
+            return false;
         }
     }
 }
