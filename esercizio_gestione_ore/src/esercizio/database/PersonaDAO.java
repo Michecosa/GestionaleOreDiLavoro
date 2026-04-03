@@ -123,6 +123,26 @@ public class PersonaDAO {
         }
     }
 
+    // READ: Restituisce ID e Nome concatenati per mostrarli nel JOptionPane
+    public ArrayList<String> getPersonePerMenu() {
+        ArrayList<String> lista = new ArrayList<>();
+        String sql = "SELECT id, nome FROM Persona";
+
+        try (Connection conn = DBConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                // Formato: "1 - Alice Rossi"
+                lista.add(rs.getInt("id") + " - " + rs.getString("nome"));
+            }
+
+        } catch (SQLException e) {
+            System.err.println("[ERRORE READ] " + e.getMessage());
+        }
+        return lista;
+    }
+
     // READ: Restituisce tutti i nomi dalla tabella Persona
     public ArrayList<String> getAllNames() {
         ArrayList<String> nomi = new ArrayList<>();

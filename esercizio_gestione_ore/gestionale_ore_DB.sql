@@ -29,10 +29,14 @@ CREATE TABLE Tester (
     FOREIGN KEY (id) REFERENCES Persona(id)
 );
 
--- Tabella: Mese
+-- Tabella: Mese (fa da "Foglio Ore Mensile")
 CREATE TABLE Mese (
-    id              INT PRIMARY KEY AUTO_INCREMENT,
-    numero_giorni   INT NOT NULL
+    id              INT PRIMARY KEY AUTO_INCREMENT, -- ID univoco del record
+    mese_calendario INT NOT NULL,                   -- 1 per Gennaio, 2 per Febbraio, ecc.
+    anno            INT NOT NULL,                   -- Es. 2024, 2025
+    numero_giorni   INT NOT NULL,                   -- 28, 30 o 31
+    persona_id      INT NOT NULL,                   -- A chi appartiene questo mese
+    FOREIGN KEY (persona_id) REFERENCES Persona(id) ON DELETE CASCADE
 );
 
 -- Tabella: Giorno

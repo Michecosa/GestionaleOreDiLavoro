@@ -6,7 +6,7 @@ public class Giorno {
     private int numeroGiorno;
     private double oreLavorate;
     private String note;
-    private int medeId; // fk verso la tabella del mese
+    private int meseId; // fk verso la tabella del mese
 
     // costruttore per nuovi inserimenti (senza id, gestito dal db)
     public Giorno(int numeroGiorno, double oreLavorate, String note, int meseId) {
