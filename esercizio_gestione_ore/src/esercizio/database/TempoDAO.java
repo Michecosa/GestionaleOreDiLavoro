@@ -123,7 +123,8 @@ public class TempoDAO {
                     while (rsGiorni.next()) {
                         int numGiorno = rsGiorni.getInt("numero_giorno");
                         double ore    = rsGiorni.getDouble("ore_lavorate");
-                        m.aggiungiOreGiorno(numGiorno, ore); // Aggiorna i giorni fittizi
+                        String note   = rsGiorni.getString("note");
+                        m.aggiungiOreGiorno(numGiorno, ore, note);
                     }
                 }
                 return m;

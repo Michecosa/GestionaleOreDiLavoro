@@ -77,8 +77,15 @@ public class Mese {
 
     // Aggiungo le ore a un giorno
     public void aggiungiOreGiorno(int numeroGiorno, double ore) {
+        aggiungiOreGiorno(numeroGiorno, ore, "");
+    }
+
+    // Aggiungo le ore e la nota a un giorno
+    public void aggiungiOreGiorno(int numeroGiorno, double ore, String nota) {
         if (numeroGiorno >= 1 && numeroGiorno <= giorni.size()) {
-            giorni.get(numeroGiorno - 1).aggiungiOre(ore);
+            Giorno g = giorni.get(numeroGiorno - 1);
+            g.aggiungiOre(ore);
+            g.setNote(nota);
         } else {
             System.out.println("Giorno non valido");
         }
