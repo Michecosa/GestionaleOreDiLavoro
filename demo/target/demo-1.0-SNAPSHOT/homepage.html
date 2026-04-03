@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestione Ore di Lavoro</title>
+</head>
+<body>
+    <h1>Benvenuto nel Gestionale Ore di Lavoro</h1>
+    <p>Clicca il pulsante per ricevere un messaggio dal servlet:</p>
+    <button onclick="callServlet()">Chiama Servlet</button>
+
+    <div id="response" style="margin-top:20px; font-weight:bold;"></div>
+
+    <script>
+        function callServlet() {
+            fetch('hello')
+                .then(response => response.text())
+                .then(text => {
+                    document.getElementById('response').innerText = text;
+                })
+                .catch(err => {
+                    document.getElementById('response').innerText = 'Errore: ' + err;
+                });
+        }
+    </script>
+</body>
+</html>
