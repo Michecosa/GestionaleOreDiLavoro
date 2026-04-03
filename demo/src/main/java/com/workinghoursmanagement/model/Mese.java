@@ -2,21 +2,43 @@ package com.workinghoursmanagement.model;
 
 import java.util.ArrayList;
 
-public class Mese 
-{   
+public class Mese {   
+    private int id; // L'id del mese nel database
+    private int personaId; // Collega il mese a una Persona
     private ArrayList<Giorno> giorni;
 
-    //costruttore
-    public Mese(int numeroGiorni) {
-        giorni = new ArrayList<>();
+    public Mese(int numeroGiorni, int personaId) {
+        this.personaId = personaId; // Salva l'id della persona
+        this.giorni = new ArrayList<>();
 
-        // Corretto: aggiunge i giorni con ore iniziali 0 e note vuote
         for (int i = 0; i < numeroGiorni; i++) {
+            // Passiamo 0 ore e nota vuota come base
             giorni.add(new Giorno(i + 1, 0, ""));
         }
     }
 
-    // aggiungo le ore a un giorno
+    // Getter e Setter per personaId
+    public int getPersonaId() {
+        return personaId;
+    }
+
+    public void setPersonaId(int personaId) {
+        this.personaId = personaId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public ArrayList<Giorno> getGiorni() {
+        return giorni;
+    }
+
+
     public void aggiungiOreGiorno(int numeroGiorno, double ore) {
         if (numeroGiorno >= 1 && numeroGiorno <= giorni.size()) {
             giorni.get(numeroGiorno - 1).aggiungiOre(ore);
@@ -31,17 +53,5 @@ public class Mese
             totale += g.getOreLavorate();
         }
         return totale;
-    }
-
-    public void stampaMese() {
-        for (Giorno g : giorni) {
-            System.out.println(g);
-        }
-    }
-
-    public void resettaMese() {
-        for (Giorno g : giorni) {
-            g.resetta();
-        }
     }
 }

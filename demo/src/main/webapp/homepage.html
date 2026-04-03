@@ -4,10 +4,23 @@
     <meta charset="UTF-8">
     <title>Gestione Ore di Lavoro</title>
     <link rel="stylesheet" href="css/homepageStyle.css">
+    <style>
+        #area-risultati {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        .worker-item {
+            padding: 5px 0;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
 </head>
 <body>
     <h1>Benvenuto nel Gestionale Ore di Lavoro</h1>
     <p>Cosa possiamo fare oggi per te?</p>
+    
     <button onclick="insertWorker()">Inserisci dipendente</button>
     <button onclick="viewWorkers()">Visualizza tutti i dipendenti</button>
     <button onclick="findWorker()">Cerca dipendente</button>
@@ -15,5 +28,92 @@
     <button onclick="removeWorker()">Elimina dipendente</button>
     
     <button onclick="viewWorkShifts()">Visualizza turni di lavoro</button>
+
+    <div id="area-risultati"></div>
+
+    <script>
+        function viewWorkers() {
+            const area = document.getElementById('area-risultati');
+            
+            // 1. Chiamata alla Servlet che hai creato
+            fetch('get-workers')
+                .then(response => {
+                    if (!response.ok) throw new Error("Errore nel recupero dati");
+                    return response.json();
+                })
+                .then(data => {
+                    // 2. Pulizia e preparazione area
+                    area.innerHTML = "<h3>Elenco Dipendenti:</h3>";
+                    area.style.display = "block";
+
+                    if (data.length === 0) {
+                        area.innerHTML += "<p>Nessun dipendente trovato nel database.</p>";
+                    } else {
+                        // 3. Creazione della lista dinamica
+                        let lista = "<ul>";
+                        data.forEach(nome => {
+                            lista += `<li class="worker-item">${nome}</li>`;
+                        });
+                        lista += "</ul>";
+                        area.innerHTML += lista;
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert("Si è verificato un errore: " + err.message);
+                });
+        }
+
+        // Funzioni "vuote" per ora per non dare errori in console
+        function insertWorker() { alert("Funzione Inserisci in fase di sviluppo"); }
+        function findWorker() { alert("Funzione Cerca in fase di sviluppo"); }
+        function modifyWorker() { alert("Funzione Modifica in fase di sviluppo"); }
+        function removeWorker() { alert("Funzione Elimina in fase di sviluppo"); }
+
+        function viewWorkShifts() {
+            let meseId = prompt("Inserisci l'ID del mese:");
+            if (!meseId) return;
+
+            const area = document.getElementById('area-risultati');
+            
+            fetch(`get-turni?id=${meseId}`)
+                .then(res => res.json())
+                .then(data => {
+                    area.style.display = "block";
+                    
+                    // Creo un'intestazione con il nome del lavoratore
+                    let html = `
+                        <div style="padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+                            <h2 style="margin:0;">Report: ${data.nome}</h2>
+                            <p style="margin:5px 0 0 0;"><strong>Totale Ore Mese: ${data.totaleOre}h</strong></p>
+                        </div>
+                        <table border="1" style="width:100%; border-collapse: collapse;">
+                            <tr style="background-color: #333; color: white;">
+                                <th>Giorno</th>
+                                <th>Ore Lavorate</th>
+                                <th>Note</th>
+                            </tr>`;
+
+                    data.giorni.forEach(g => {
+                        let stileRiga = g.oreLavorate === 0 ? "color: #ccc;" : "font-weight: bold;";
+                        
+                        html += `
+                            <tr style="${stileRiga}">
+                                <td align="center">${g.numeroGiorno}</td>
+                                <td align="center">${g.oreLavorate}</td>
+                                <td>${g.note || ""}</td>
+                            </tr>`;
+                    });
+
+                    html += "</table>";
+                    area.innerHTML = html;
+                });
+        }
+
+        // Funzione helper per calcolare il totale lato client
+        function calculateTotal(giorni) {
+            return giorni.reduce((acc, g) => acc + g.oreLavorate, 0);
+        }
+    </script>
 </body>
 </html>

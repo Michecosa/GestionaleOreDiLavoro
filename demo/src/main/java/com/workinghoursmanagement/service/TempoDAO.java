@@ -1,35 +1,32 @@
 package com.workinghoursmanagement.service;
 
-import java.sql.*;
-
 import com.workinghoursmanagement.model.Mese;
+import java.sql.*;
 
 public class TempoDAO {
 
-    // CREATE MESE: Inserisce un nuovo Mese e restituisce l'ID generato
-    public int creaMese(int numeroGiorni) {
-        String sql = "INSERT INTO Mese (numero_giorni) VALUES (?)";
+    // CREATE MESE: Inserisce un nuovo Mese collegato a una Persona
+    public int creaMese(int numeroGiorni, int personaId) {
+        String sql = "INSERT INTO Mese (numero_giorni, persona_id) VALUES (?, ?)";
 
         try (Connection conn = DbConn.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setInt(1, numeroGiorni);
+            stmt.setInt(2, personaId); 
             stmt.executeUpdate();
 
             ResultSet keys = stmt.getGeneratedKeys();
             if (keys.next()) {
-                int id = keys.getInt(1);
-                System.out.println("[DB] Mese creato con ID: " + id);
-                return id;
+                return keys.getInt(1);
             }
-
         } catch (SQLException e) {
             System.err.println("[ERRORE CREA MESE] " + e.getMessage());
         }
         return -1;
     }
 
-    // CREATE/UPDATE GIORNO: Salva o aggiorna le ore di un giorno specifico
+    // CREATE/UPDATE GIORNO: Invariato, funziona già bene con mese_id
     public void salvaOreGiorno(int meseId, int numeroGiorno, double ore, String note) {
         String sql = "INSERT INTO Giorno (mese_id, numero_giorno, ore_lavorate, note) " +
                      "VALUES (?, ?, ?, ?) " +
@@ -53,9 +50,10 @@ public class TempoDAO {
         }
     }
 
-    // READ: Recupera il Mese completo con tutti i suoi Giorni dal DB
+    // READ: Recupera il Mese completo (CORRETTO con persona_id)
     public Mese getMeseCompleto(int meseId) {
-        String sqlMese = "SELECT numero_giorni FROM Mese WHERE id = ?";
+        // Aggiungiamo persona_id alla SELECT
+        String sqlMese = "SELECT numero_giorni, persona_id FROM Mese WHERE id = ?";
 
         try (Connection conn = DbConn.getConnection();
              PreparedStatement stmtMese = conn.prepareStatement(sqlMese)) {
@@ -65,7 +63,11 @@ public class TempoDAO {
 
             if (rsMese.next()) {
                 int numeroGiorni = rsMese.getInt("numero_giorni");
-                Mese m = new Mese(numeroGiorni);
+                int personaId = rsMese.getInt("persona_id"); // Recuperiamo la FK
+                
+                // USIAMO IL NUOVO COSTRUTTORE DI MESE
+                Mese m = new Mese(numeroGiorni, personaId);
+                m.setId(meseId);
 
                 String sqlGiorni = "SELECT numero_giorno, ore_lavorate, note " +
                                    "FROM Giorno WHERE mese_id = ?";
@@ -89,7 +91,7 @@ public class TempoDAO {
         return null;
     }
 
-    // DELETE: Elimina un Mese e tutti i suoi giorni (se CASCADE è attivo)
+    // DELETE MESE: Invariato
     public void deleteMese(int meseId) {
         String sql = "DELETE FROM Mese WHERE id = ?";
 
@@ -99,7 +101,7 @@ public class TempoDAO {
             stmt.setInt(1, meseId);
             int righeColpite = stmt.executeUpdate();
             if (righeColpite > 0) {
-                System.out.println("[DB] Mese eliminato con successo.");
+                System.out.println("[DB] Mese eliminato con successo");
             }
 
         } catch (SQLException e) {

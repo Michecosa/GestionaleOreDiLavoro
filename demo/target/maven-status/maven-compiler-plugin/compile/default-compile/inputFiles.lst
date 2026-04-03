@@ -1,4 +1,6 @@
 C:\Users\miche\Documents\repositoryGithub\esercizio_gestionale_ore_di_lavoro\GestionaleOreDiLavoro\demo\src\main\java\com\workinghoursmanagement\controller\controller.java
+C:\Users\miche\Documents\repositoryGithub\esercizio_gestionale_ore_di_lavoro\GestionaleOreDiLavoro\demo\src\main\java\com\workinghoursmanagement\GetTurniServlet.java
+C:\Users\miche\Documents\repositoryGithub\esercizio_gestionale_ore_di_lavoro\GestionaleOreDiLavoro\demo\src\main\java\com\workinghoursmanagement\GetWorkersServlet.java
 C:\Users\miche\Documents\repositoryGithub\esercizio_gestionale_ore_di_lavoro\GestionaleOreDiLavoro\demo\src\main\java\com\workinghoursmanagement\HTTPMain.java
 C:\Users\miche\Documents\repositoryGithub\esercizio_gestionale_ore_di_lavoro\GestionaleOreDiLavoro\demo\src\main\java\com\workinghoursmanagement\model\Designer.java
 C:\Users\miche\Documents\repositoryGithub\esercizio_gestionale_ore_di_lavoro\GestionaleOreDiLavoro\demo\src\main\java\com\workinghoursmanagement\model\Giorno.java
@@ -7,3 +9,6 @@ C:\Users\miche\Documents\repositoryGithub\esercizio_gestionale_ore_di_lavoro\Ges
 C:\Users\miche\Documents\repositoryGithub\esercizio_gestionale_ore_di_lavoro\GestionaleOreDiLavoro\demo\src\main\java\com\workinghoursmanagement\model\Sviluppatore.java
 C:\Users\miche\Documents\repositoryGithub\esercizio_gestionale_ore_di_lavoro\GestionaleOreDiLavoro\demo\src\main\java\com\workinghoursmanagement\model\Tester.java
 C:\Users\miche\Documents\repositoryGithub\esercizio_gestionale_ore_di_lavoro\GestionaleOreDiLavoro\demo\src\main\java\com\workinghoursmanagement\service\DbConn.java
+C:\Users\miche\Documents\repositoryGithub\esercizio_gestionale_ore_di_lavoro\GestionaleOreDiLavoro\demo\src\main\java\com\workinghoursmanagement\service\PersonaDAO.java
+C:\Users\miche\Documents\repositoryGithub\esercizio_gestionale_ore_di_lavoro\GestionaleOreDiLavoro\demo\src\main\java\com\workinghoursmanagement\service\TempoDAO.java
+C:\Users\miche\Documents\repositoryGithub\esercizio_gestionale_ore_di_lavoro\GestionaleOreDiLavoro\demo\src\main\java\com\workinghoursmanagement\utility\Utility.java

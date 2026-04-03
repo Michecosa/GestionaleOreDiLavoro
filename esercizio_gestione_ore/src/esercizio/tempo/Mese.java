@@ -4,15 +4,44 @@ import java.util.ArrayList;
 
 public class Mese 
 {   
+    private int id; // id tabella mese
+    private int personaId; // fk collegata alla tabella persona
+    private int numeroGiorni; // colonna numero_giorni nel db
     private ArrayList<Giorno> giorni;
 
-    //costruttore
-    public Mese(int numeroGiorni) {
-        giorni = new ArrayList<>();
 
-        // Corretto: aggiunge i giorni con ore iniziali 0 e note vuote
+
+
+    // --- GETTER E SETTER ---
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getPersonaId() {
+        return personaId;
+    }
+
+    public ArrayList<Giorno> getGiorni() {
+        return giorni; 
+    }
+
+
+
+
+    //costruttore
+    public Mese(int numeroGiorni, int personaId) {
+        this.numeroGiorni = numeroGiorni;
+        this.personaId = personaId;
+        this.giorni = new ArrayList<>();
+
+        // Inizializzazione automatica dei giorni
         for (int i = 0; i < numeroGiorni; i++) {
-            giorni.add(new Giorno(i + 1, 0, ""));
+            this.giorni.add(new Giorno(i + 1, 0, "")); 
         }
     }
 

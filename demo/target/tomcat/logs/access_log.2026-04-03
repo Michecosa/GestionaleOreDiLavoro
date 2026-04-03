@@ -1,3 +1,0 @@
-0:0:0:0:0:0:0:1 - - [03/Apr/2026:19:01:35 +0200] "GET /homepage.html HTTP/1.1" 200 832 http-bio-9090-exec-1 103
-0:0:0:0:0:0:0:1 - - [03/Apr/2026:19:01:35 +0200] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 1047 http-bio-9090-exec-2 8
-0:0:0:0:0:0:0:1 - - [03/Apr/2026:19:01:39 +0200] "GET /hello HTTP/1.1" 200 19 http-bio-9090-exec-3 1

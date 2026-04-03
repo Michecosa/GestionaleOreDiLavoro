@@ -44,3 +44,16 @@ CREATE TABLE Giorno (
     mese_id         INT             NOT NULL,
     FOREIGN KEY (mese_id) REFERENCES Mese(id)
 );
+
+
+
+
+
+
+-- Aggiunge la colonna per collegare il Mese alla Persona
+ALTER TABLE Mese ADD COLUMN persona_id INT NOT NULL;
+
+-- Crea il vincolo di parentela
+ALTER TABLE Mese 
+ADD CONSTRAINT fk_persona_mese 
+FOREIGN KEY (persona_id) REFERENCES Persona(id) ON DELETE CASCADE;

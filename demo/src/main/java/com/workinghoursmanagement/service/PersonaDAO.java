@@ -181,4 +181,22 @@ public class PersonaDAO {
             System.err.println("[ERRORE DELETE] " + e.getMessage());
         }
     }
+
+
+    public String getNomeById(int id) {
+        String sql = "SELECT nome FROM Persona WHERE id = ?";
+        try (Connection conn = DbConn.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString("nome");
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("[ERRORE getNomeById] " + e.getMessage());
+        }
+        return "Utente Sconosciuto";
+    }
 }

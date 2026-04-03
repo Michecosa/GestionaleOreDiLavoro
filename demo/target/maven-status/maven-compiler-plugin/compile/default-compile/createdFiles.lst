@@ -1,9 +1,14 @@
 com\workinghoursmanagement\model\Persona.class
 com\workinghoursmanagement\model\Designer.class
+com\workinghoursmanagement\service\TempoDAO.class
 com\workinghoursmanagement\service\DbConn.class
-com\workinghoursmanagement\controller\controller.class
-com\workinghoursmanagement\model\Sviluppatore.class
 com\workinghoursmanagement\model\Tester.class
-com\workinghoursmanagement\HTTPMain.class
 com\workinghoursmanagement\model\Giorno.class
 com\workinghoursmanagement\model\Mese.class
+com\workinghoursmanagement\utility\Utility.class
+com\workinghoursmanagement\service\PersonaDAO.class
+com\workinghoursmanagement\controller\controller.class
+com\workinghoursmanagement\GetWorkersServlet.class
+com\workinghoursmanagement\model\Sviluppatore.class
+com\workinghoursmanagement\GetTurniServlet.class
+com\workinghoursmanagement\HTTPMain.class
