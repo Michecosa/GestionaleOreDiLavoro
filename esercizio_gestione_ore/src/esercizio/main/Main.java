@@ -17,23 +17,23 @@ import java.time.YearMonth;
 
 public class Main {
 
-    // ── Palette colori (Migliorata per contrasto) ───────────────────────────
-    private static final Color BG          = new Color(0xF4, 0xF7, 0xF6); // Sfondo molto chiaro, quasi bianco
-    private static final Color PANEL_BG    = Color.WHITE;                  // Pannelli bianchi per stacco
-    private static final Color CARD_BG     = Color.WHITE;                  // Schede bianche
-    private static final Color ACCENT      = new Color(0x00, 0x56, 0xD2); // Blu scuro e saturo (accessibile)
-    private static final Color ACCENT2     = new Color(0x62, 0x00, 0xEA); // Viola scuro (accessibile)
-    private static final Color TEXT_MAIN   = new Color(0x1A, 0x1D, 0x21); // Testo quasi nero
-    private static final Color TEXT_SUB    = new Color(0x5F, 0x63, 0x68); // Grigio medio-scuro per sottotitoli
-    private static final Color DANGER      = new Color(0xD3, 0x2F, 0x2F); // Rosso scuro
-    private static final Color SUCCESS     = new Color(0x1B, 0x5E, 0x20); // Verde scuro
-    private static final Color ROW_ALT     = new Color(0xF8, 0xF9, 0xFA); // Grigio chiarissimo per righe alterne
-    private static final Color BORDER      = new Color(0xDA, 0xDF, 0xE4); // Colore bordi standard
+    // ── Palette colori ───────────────────────────
+    private static final Color BG = new Color(0xF4, 0xF7, 0xF6); // Sfondo molto chiaro, quasi bianco
+    private static final Color PANEL_BG = Color.WHITE; // Pannelli bianchi per stacco
+    private static final Color CARD_BG = Color.WHITE; // Schede bianche
+    private static final Color ACCENT = new Color(0x00, 0x56, 0xD2); // Blu scuro e saturo (accessibile)
+    private static final Color ACCENT2 = new Color(0x62, 0x00, 0xEA); // Viola scuro (accessibile)
+    private static final Color TEXT_MAIN = new Color(0x1A, 0x1D, 0x21); // Testo quasi nero
+    private static final Color TEXT_SUB = new Color(0x5F, 0x63, 0x68); // Grigio medio-scuro per sottotitoli
+    private static final Color DANGER = new Color(0xD3, 0x2F, 0x2F); // Rosso scuro
+    private static final Color SUCCESS = new Color(0x1B, 0x5E, 0x20); // Verde scuro
+    private static final Color ROW_ALT = new Color(0xF8, 0xF9, 0xFA); // Grigio chiarissimo per righe alterne
+    private static final Color BORDER = new Color(0xDA, 0xDF, 0xE4); // Colore bordi standard
 
     private static PersonaDAO personaDAO = new PersonaDAO();
     private static TempoDAO   tempoDAO   = new TempoDAO();
 
-    // ── Punto di ingresso ────────────────────────────────────────────────────
+    // Punto di ingresso
     public static void main(String[] args) {
         try { UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); }
         catch (Exception ignored) {}
@@ -41,18 +41,18 @@ public class Main {
         SwingUtilities.invokeLater(Main::buildMainWindow);
     }
 
-    // ── Finestra principale ──────────────────────────────────────────────────
+    // Finestra principale
     private static void buildMainWindow() {
         JFrame frame = new JFrame("Gestionale Ore");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(950, 680); // Leggermente più grande
+        frame.setSize(950, 680);
         frame.setLocationRelativeTo(null);
         frame.setBackground(BG);
 
         JPanel root = new JPanel(new BorderLayout());
         root.setBackground(BG);
 
-        // ── Sidebar ──────────────────────────────────────────────────────────
+        // Sidebar
         JPanel sidebar = new JPanel();
         sidebar.setBackground(PANEL_BG);
         sidebar.setPreferredSize(new Dimension(220, 0));
@@ -74,23 +74,23 @@ public class Main {
         JPanel cardPanel = new JPanel(cardLayout);
         cardPanel.setBackground(BG);
 
-        // ── Schede ───────────────────────────────────────────────────────────
-        JPanel panelDashboard   = buildDashboard();
-        JPanel panelDipendenti  = buildDipendentiPanel();
-        JPanel panelAggiungi    = buildAggiungiPanel();
-        JPanel panelTurni       = buildTurniPanel();
+        // Schede
+        JPanel panelDashboard = buildDashboard();
+        JPanel panelDipendenti = buildDipendentiPanel();
+        JPanel panelAggiungi = buildAggiungiPanel();
+        JPanel panelTurni = buildTurniPanel();
 
-        cardPanel.add(panelDashboard,  "DASHBOARD");
+        cardPanel.add(panelDashboard, "DASHBOARD");
         cardPanel.add(panelDipendenti, "DIPENDENTI");
-        cardPanel.add(panelAggiungi,   "AGGIUNGI");
-        cardPanel.add(panelTurni,      "TURNI");
+        cardPanel.add(panelAggiungi,  "AGGIUNGI");
+        cardPanel.add(panelTurni, "TURNI");
 
-        // ── Bottoni sidebar ───────────────────────────────────────────────────
+        // Bottoni sidebar 
         String[][] navItems = {
-            {"Dashboard",   "DASHBOARD"},
-            {"Dipendenti",  "DIPENDENTI"},
-            {"Aggiungi",    "AGGIUNGI"},
-            {"Turni",       "TURNI"},
+            {"Dashboard", "DASHBOARD"},
+            {"Dipendenti", "DIPENDENTI"},
+            {"Aggiungi", "AGGIUNGI"},
+            {"Turni", "TURNI"},
         };
 
         for (String[] item : navItems) {
@@ -133,7 +133,7 @@ public class Main {
         frame.setVisible(true);
     }
 
-    // ── Dashboard ─────────────────────────────────────────────────────────────
+    // Dashboard
     private static JPanel buildDashboard() {
         JPanel p = new JPanel(new BorderLayout());
         p.setBackground(BG);
@@ -158,7 +158,7 @@ public class Main {
         return p;
     }
 
-    // ── Pannello Dipendenti ───────────────────────────────────────────────────
+    // Pannello Dipendenti
     private static JPanel buildDipendentiPanel() {
         JPanel outer = new JPanel(new BorderLayout());
         outer.setBackground(BG);
@@ -277,7 +277,7 @@ public class Main {
         return outer;
     }
 
-    // -- Dialog modifica dipendente (accessibilità migliorata)
+    // Dialog modifica dipendente
     private static void showModificaDialog(Component parent, int id, String nomeCorrente, Runnable onDone) {
         JDialog dlg = new JDialog((JFrame) SwingUtilities.getWindowAncestor(parent), "Modifica Età", true);
         dlg.setSize(380, 240);
@@ -312,19 +312,19 @@ public class Main {
         JButton btnSalva = accentButton("Salva modifiche", ACCENT);
         btnSalva.addActionListener(e -> {
             try {
-                if (fEta.getText().isBlank()) { showInfo(dlg, "Inserisci la nuova età."); return; }
+                if (fEta.getText().isBlank()) { showInfo(dlg, "Inserisci la nuova età"); return; }
                 int nuovaEta = Integer.parseInt(fEta.getText().trim());
-                if (nuovaEta < 18 || nuovaEta > 100) { showInfo(dlg, "Inserisci un'età valida (18-100)."); return; }
+                if (nuovaEta < 18 || nuovaEta > 100) { showInfo(dlg, "Inserisci un'età valida (18-100)"); return; }
 
                 if (personaDAO.updateEta(id, nuovaEta)) {
                     onDone.run();
                     showSuccess(parent, "Età aggiornata con successo.");
                     dlg.dispose();
                 } else {
-                    showError(dlg, "Errore durante l'aggiornamento nel database.");
+                    showError(dlg, "Errore durante l'aggiornamento nel database");
                 }
             } catch (NumberFormatException ex) {
-                showInfo(dlg, "Inserisci un valore numerico valido per l'età.");
+                showInfo(dlg, "Inserisci un valore numerico valido per l'età");
             }
         });
         p.add(btnSalva, gc);
@@ -333,7 +333,7 @@ public class Main {
         dlg.setVisible(true);
     }
 
-    // ── Pannello Aggiungi Dipendente ──────────────────────────────────────────
+    // Pannello Aggiungi Dipendente
     private static JPanel buildAggiungiPanel() {
         JPanel outer = new JPanel(new BorderLayout());
         outer.setBackground(BG);
@@ -370,18 +370,24 @@ public class Main {
             String r = (String) cbRuolo.getSelectedItem();
             fExtra.setText("");
             fExtra.setForeground(TEXT_SUB); // Ripristina colore placeholder
-            if      ("Sviluppatore".equals(r)) { lblExtra.setText("Linguaggio principale:"); fExtra.setToolTipText("Es. Java, Python"); }
-            else if ("Designer".equals(r))     { lblExtra.setText("Tool di design:");       fExtra.setToolTipText("Es. Figma, Adobe XD"); }
-            else                               { lblExtra.setText("Tipo di testing:");      fExtra.setToolTipText("Es. Unit, Functional, UI"); }
+            if ("Sviluppatore".equals(r)) { 
+                lblExtra.setText("Linguaggio principale:"); 
+                fExtra.setToolTipText("Es. Java, Python"); 
+            } else if ("Designer".equals(r)) { 
+                lblExtra.setText("Tool di design:"); 
+                fExtra.setToolTipText("Es. Figma, Adobe XD"); 
+            } else { 
+                lblExtra.setText("Tipo di testing:"); 
+                fExtra.setToolTipText("Es. Unit, Functional, UI"); 
+            }
         });
-        // Trigger iniziale
         cbRuolo.getActionListeners()[0].actionPerformed(null);
 
         int r = 0;
         addFormRow(form, gc, r++, "Nome Completo:", fNome);
-        addFormRow(form, gc, r++, "Età:",           fEta);
+        addFormRow(form, gc, r++, "Età:", fEta);
         addFormRow(form, gc, r++, "Ruolo Aziendale:", cbRuolo);
-        addFormRow(form, gc, r++, lblExtra,         fExtra);
+        addFormRow(form, gc, r++, lblExtra, fExtra);
 
         gc.gridx = 0; gc.gridy = r; gc.gridwidth = 2;
         gc.insets = new Insets(25, 10, 10, 10);
@@ -390,7 +396,7 @@ public class Main {
 
         btnAdd.addActionListener(e -> {
             try {
-                // Rimuoviamo placeholder se presenti
+                // Rimuovo placeholder se presenti
                 String nome  = fNome.getText().equals("Es. Mario Rossi") ? "" : fNome.getText().trim();
                 String etaStr = fEta.getText().equals("Es. 30") ? "" : fEta.getText().trim();
                 String extra = fExtra.getText().trim();
@@ -406,8 +412,8 @@ public class Main {
                 boolean success = false;
                 switch (ruolo) {
                     case "Sviluppatore" -> success = personaDAO.createSviluppatore(new Sviluppatore(0, nome, eta, extra));
-                    case "Designer"     -> success = personaDAO.createDesigner(new Designer(0, nome, eta, extra));
-                    case "Tester"       -> success = personaDAO.createTester(new Tester(0, nome, eta, extra));
+                    case "Designer" -> success = personaDAO.createDesigner(new Designer(0, nome, eta, extra));
+                    case "Tester" -> success = personaDAO.createTester(new Tester(0, nome, eta, extra));
                 }
 
                 if (success) {
@@ -432,7 +438,7 @@ public class Main {
         return outer;
     }
 
-    // ── Pannello Turni ────────────────────────────────────────────────────────
+    // Pannello Turni
     private static JPanel buildTurniPanel() {
         JPanel outer = new JPanel(new BorderLayout());
         outer.setBackground(BG);
@@ -448,14 +454,14 @@ public class Main {
         tabs.setBorder(BorderFactory.createLineBorder(BORDER));
 
         // Teniamo riferimento alle combo per poterle ricaricare
-        JComboBox<PersonaDAO.PersonaInfo>[] cbOre      = new JComboBox[1];
-        JComboBox<PersonaDAO.PersonaInfo>[] cbVis      = new JComboBox[1];
-        JComboBox<TempoDAO.MeseInfo>[]      cbMeseOre  = new JComboBox[1];
-        JComboBox<TempoDAO.MeseInfo>[]      cbMeseVis  = new JComboBox[1];
+        JComboBox<PersonaDAO.PersonaInfo>[] cbOre = new JComboBox[1];
+        JComboBox<PersonaDAO.PersonaInfo>[] cbVis = new JComboBox[1];
+        JComboBox<TempoDAO.MeseInfo>[] cbMeseOre = new JComboBox[1];
+        JComboBox<TempoDAO.MeseInfo>[] cbMeseVis = new JComboBox[1];
 
-        tabs.addTab("  Inizializza Mese  ",       buildCreaMesePanel());
+        tabs.addTab("  Inizializza Mese  ", buildCreaMesePanel());
         tabs.addTab("  Registra Ore Giorniere  ", buildInserisciOrePanel(cbOre, cbMeseOre));
-        tabs.addTab("  Visualizza Resoconto  ",   buildVisualizzaPanel(cbVis, cbMeseVis));
+        tabs.addTab("  Visualizza Resoconto  ", buildVisualizzaPanel(cbVis, cbMeseVis));
 
         // Ogni volta che si entra nella tab Ore o Resoconto, ricarica i dipendenti
         tabs.addChangeListener(e -> {
@@ -566,10 +572,10 @@ public class Main {
             public void changedUpdate(javax.swing.event.DocumentEvent e) { aggiornaGiorni.run(); }
         });
 
-        addFormRow(p, gc, 0, "Dipendente:",       cbDipendente);
-        addFormRow(p, gc, 1, "Mese (1-12):",      fMese);
-        addFormRow(p, gc, 2, "Anno:",              fAnno);
-        addFormRow(p, gc, 3, "Giorni nel mese:",  lblGiorni);
+        addFormRow(p, gc, 0, "Dipendente:", cbDipendente);
+        addFormRow(p, gc, 1, "Mese (1-12):", fMese);
+        addFormRow(p, gc, 2, "Anno:", fAnno);
+        addFormRow(p, gc, 3, "Giorni nel mese:", lblGiorni);
 
         gc.gridx = 0; gc.gridy = 4; gc.gridwidth = 2;
         gc.insets = new Insets(25, 10, 10, 10);
@@ -585,7 +591,7 @@ public class Main {
                 int anno = Integer.parseInt(fAnno.getText().replace("Es. 2026","").trim());
 
                 if (mese < 1 || mese > 12) { showInfo(p, "Mese non valido (1-12)."); return; }
-                if (anno < 1900)            { showInfo(p, "Anno non valido."); return; }
+                if (anno < 1900) { showInfo(p, "Anno non valido."); return; }
 
                 int giorni = YearMonth.of(anno, mese).lengthOfMonth();
 
@@ -648,14 +654,14 @@ public class Main {
         aggiornaMesi.run(); // carica subito
 
         JTextField fGiorno = styledField("Es. 15");
-        JTextField fOre    = styledField("Es. 8.0");
-        JTextField fNote   = styledField("Es. Attività di sviluppo...");
+        JTextField fOre = styledField("Es. 8.0");
+        JTextField fNote = styledField("Es. Attività di sviluppo...");
 
-        addFormRow(p, gc, 0, "Dipendente:",    cbDipendente);
-        addFormRow(p, gc, 1, "Foglio Ore:",    cbMese);
-        addFormRow(p, gc, 2, "Giorno:",        fGiorno);
-        addFormRow(p, gc, 3, "Ore Lavorate:",  fOre);
-        addFormRow(p, gc, 4, "Note:",          fNote);
+        addFormRow(p, gc, 0, "Dipendente:", cbDipendente);
+        addFormRow(p, gc, 1, "Foglio Ore:", cbMese);
+        addFormRow(p, gc, 2, "Giorno:", fGiorno);
+        addFormRow(p, gc, 3, "Ore Lavorate:", fOre);
+        addFormRow(p, gc, 4, "Note:", fNote);
 
         gc.gridx = 0; gc.gridy = 5; gc.gridwidth = 2;
         gc.insets = new Insets(25, 10, 10, 10);
@@ -667,12 +673,12 @@ public class Main {
                 TempoDAO.MeseInfo meseInfo = (TempoDAO.MeseInfo) cbMese.getSelectedItem();
                 if (meseInfo == null) { showInfo(p, "Nessun foglio ore disponibile per questo dipendente."); return; }
 
-                int    giorno = Integer.parseInt(fGiorno.getText().replace("Es. 15","").trim());
-                double ore    = Double.parseDouble(fOre.getText().replace("Es. 8.0","").trim());
-                String note   = fNote.getText().equals("Es. Attività di sviluppo...") ? "" : fNote.getText().trim();
+                int giorno = Integer.parseInt(fGiorno.getText().replace("Es. 15","").trim());
+                double ore = Double.parseDouble(fOre.getText().replace("Es. 8.0","").trim());
+                String note = fNote.getText().equals("Es. Attività di sviluppo...") ? "" : fNote.getText().trim();
 
                 if (giorno < 1 || giorno > 31) { showInfo(p, "Giorno non valido."); return; }
-                if (ore < 0 || ore > 24)        { showInfo(p, "Numero ore non valido."); return; }
+                if (ore < 0 || ore > 24) { showInfo(p, "Numero ore non valido."); return; }
 
                 if (tempoDAO.salvaOreGiorno(meseInfo.id, giorno, ore, note)) {
                     showSuccess(p, "Ore registrate per il giorno " + giorno + ".");
@@ -681,7 +687,7 @@ public class Main {
                     showError(p, "Impossibile salvare le ore.");
                 }
             } catch (NumberFormatException ex) {
-                showInfo(p, "Inserisci valori numerici validi per Giorno e Ore.");
+                showInfo(p, "Inserisci valori numerici validi per Giorno e Ore");
             }
         });
 
@@ -758,7 +764,7 @@ public class Main {
         lblTotale.setFont(new Font("Segoe UI", Font.BOLD, 15));
         lblTotale.setBorder(BorderFactory.createEmptyBorder(15, 5, 0, 0));
 
-        p.add(scroll,    BorderLayout.CENTER);
+        p.add(scroll, BorderLayout.CENTER);
         p.add(lblTotale, BorderLayout.SOUTH);
 
         // Aggiorna combo mesi al cambio dipendente
@@ -768,13 +774,13 @@ public class Main {
 
         btn.addActionListener(e -> {
             TempoDAO.MeseInfo meseInfo = (TempoDAO.MeseInfo) cbMese.getSelectedItem();
-            if (meseInfo == null) { showInfo(p, "Seleziona un dipendente e un foglio ore."); return; }
+            if (meseInfo == null) { showInfo(p, "Seleziona un dipendente e un foglio ore"); return; }
 
             Mese m = tempoDAO.getMeseCompleto(meseInfo.id);
             model.setRowCount(0);
             lblTotale.setText(" ");
 
-            if (m == null) { showInfo(p, "Nessun dato trovato."); return; }
+            if (m == null) { showInfo(p, "Nessun dato trovato"); return; }
 
             for (var g : m.getGiorni()) {
                 model.addRow(new Object[]{
