@@ -1,4 +1,9 @@
-com\workinghoursmanagement\controller\controller.class
-com\workinghoursmanagement\HTTPMain.class
-com\workinghoursmanagement\model\Person.class
+com\workinghoursmanagement\model\Persona.class
+com\workinghoursmanagement\model\Designer.class
 com\workinghoursmanagement\service\DbConn.class
+com\workinghoursmanagement\controller\controller.class
+com\workinghoursmanagement\model\Sviluppatore.class
+com\workinghoursmanagement\model\Tester.class
+com\workinghoursmanagement\HTTPMain.class
+com\workinghoursmanagement\model\Giorno.class
+com\workinghoursmanagement\model\Mese.class
