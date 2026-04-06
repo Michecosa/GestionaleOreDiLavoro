@@ -1,0 +1,72 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<!-- Tag radice di un progetto Maven.  -->
+
+    <modelVersion>4.0.0</modelVersion>
+    <!-- Versione del modello POM -->
+
+    <groupId>com.gestionaleturni</groupId>
+    <!-- Identifica il gruppo od il pacchetto principale del progetto -->
+
+    <artifactId>demov2</artifactId>
+    <!-- Nome univoco dell’artefatto generato dal progetto -->
+
+    <version>1.0-SNAPSHOT</version>
+    <!-- Versione del progetto. SNAPSHOT indica che è una versione in sviluppo -->
+
+    <packaging>war</packaging>
+    <!-- Tipo di pacchetto generato: WAR (Web Application Archive) -->
+
+    <name>Gestionale Turni</name>
+    <!-- Nome leggibile del progetto -->
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <!-- Configura il compilatore Java per usare Java 17 -->
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Codifica dei sorgenti in UTF-8 -->
+    </properties>
+
+    <dependencies>
+        <!-- Servlet API per Tomcat 10 (Jakarta EE) -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>5.0.0</version>
+            <scope>provided</scope>
+            <!-- "provided" significa che il server (Tomcat) fornisce già questa libreria -->
+        </dependency>
+
+        <!-- JSP API -->
+        <dependency>
+            <groupId>jakarta.servlet.jsp</groupId>
+            <artifactId>jakarta.servlet.jsp-api</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JSTL (tag lib per JSP) -->
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+
+        <!-- MySQL Connector per la connessione al database -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>demov2</finalName>
+        <!-- Nome finale del file WAR generato -->
+    </build>
+
+</project>

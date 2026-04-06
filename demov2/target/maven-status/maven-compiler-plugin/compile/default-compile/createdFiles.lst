@@ -1,0 +1,10 @@
+controller\WorkerController.class
+dao\DBConnection.class
+dao\WorkerDAO.class
+service\WorkerService.class
+model\CalendarMonth.class
+dao\ShiftDAO.class
+service\ShiftService.class
+model\Shift.class
+model\Worker.class
+controller\ShiftCalendarController.class

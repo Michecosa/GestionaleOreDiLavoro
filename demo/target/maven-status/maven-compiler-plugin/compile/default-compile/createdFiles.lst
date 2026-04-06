@@ -1,5 +1,8 @@
+com\workinghoursmanagement\utility\Utility.class
 com\workinghoursmanagement\model\Persona.class
+com\workinghoursmanagement\service\PersonaDAO.class
 com\workinghoursmanagement\model\Designer.class
+com\workinghoursmanagement\service\TempoDAO.class
 com\workinghoursmanagement\service\DbConn.class
 com\workinghoursmanagement\controller\controller.class
 com\workinghoursmanagement\model\Sviluppatore.class

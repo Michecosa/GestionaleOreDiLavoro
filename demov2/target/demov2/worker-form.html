@@ -1,0 +1,34 @@
+<h2>Nuovo lavoratore</h2>
+<!-- Intestazione della sezione per aggiungere un nuovo lavoratore -->
+
+<form method="post" action="workers">
+    <!-- Inizio del form HTML. 
+         method="post" indica che i dati verranno inviati al server tramite POST.
+         action="workers" specifica l'URL o servlet che gestirà i dati inviati -->
+
+    <label>Nome:</label>
+    <!-- Etichetta per il campo di input del nome del lavoratore -->
+
+    <input type="text" name="name" required>
+    <!-- Campo di testo per inserire il nome.
+         Il nome dell'input è "name", che verrà utilizzato dal server per recuperare il valore.
+         required indica che il campo è obbligatorio -->
+
+    <label>Specializzazione:</label>
+    <!-- Etichetta per la selezione della specializzazione -->
+
+    <select name="specId">
+        <!-- Menù a tendina per scegliere la specializzazione del lavoratore.
+             Il valore selezionato sarà inviato come "specId" al server -->
+
+        <option value="1">Full-Stack Developer</option>
+        <!-- Opzione 1: Full-Stack Developer -->
+
+        <option value="2">Tester</option>
+        <!-- Opzione 2: Tester -->
+    </select>
+
+    <button type="submit">Salva</button>
+    <!-- Pulsante per inviare il form al server -->
+</form>
+<!-- Fine del form -->

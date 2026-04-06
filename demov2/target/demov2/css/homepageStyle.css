@@ -1,0 +1,81 @@
+body {
+  font-family: Arial, sans-serif;
+  /* Imposta il font principale della pagina su Arial, con fallback sans-serif */
+
+  background: #111;
+  /* Sfondo della pagina di colore quasi nero */
+
+  color: #fff;
+  /* Colore del testo bianco */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* Centra tutto verticalmente e orizzontalmente usando Flexbox */
+
+  height: 100vh;
+  /* Imposta l'altezza del body al 100% della finestra (viewport height) */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* Centra contenuti verticalmente e orizzontalmente */
+
+  background: #1e1e1e;
+  /* Sfondo leggermente più chiaro del body per distinguere il container */
+
+  padding: 20px;
+  /* Spaziatura interna intorno ai contenuti */
+
+  border-radius: 8px;
+  /* Angoli arrotondati del container */
+
+  text-align: center;
+  /* Centra il testo all'interno del container */
+}
+
+input {
+  width: 80px;
+  /* Larghezza del campo input */
+
+  padding: 8px;
+  /* Spaziatura interna del campo input */
+
+  margin-bottom: 25px;
+  /* Margine inferiore per separarlo dagli altri elementi */
+
+  text-align: center;
+  /* Testo all'interno del campo centrato */
+}
+
+button {
+  margin-top: 10px;
+  /* Margine sopra il pulsante per distanziarlo dagli elementi precedenti */
+
+  padding: 10px 20px;
+  /* Spaziatura interna del pulsante (alto/basso e sinistra/destra) */
+
+  background: gold;
+  /* Colore di sfondo del pulsante */
+
+  border: none;
+  /* Rimuove il bordo predefinito del pulsante */
+
+  cursor: pointer;
+  /* Cambia il cursore quando si passa sopra il pulsante */
+
+  font-weight: bold;
+  /* Testo del pulsante in grassetto */
+}
+
+#result {
+  margin-top: 15px;
+  /* Margine sopra l’elemento per separarlo dal pulsante */
+
+  font-size: 18px;
+  /* Dimensione del testo leggermente più grande */
+}
